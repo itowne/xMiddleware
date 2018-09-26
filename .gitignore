@@ -1,0 +1,9 @@
+
+\.settings/
+
+\.project
+
+xMiddleware-controller/target/
+
+xMiddleware-service/target/
+*.classpath

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<springProperty name="LOG_PATH" source="logging.path" />
+	<springProperty name="LOG_ROOT_LEVEL"
+		source="logging.root.level" />
+	<springProperty name="LOG_CHARSET"
+		source="logging.charset" />
+	<springProperty name="LOG_FILE_SIZE"
+		source="logging.file.size" />
+
+	<springProfile name="prod">
+		<!-- all log appender -->
+		<appender name="ROOT-APPENDER"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<append>true</append>
+			<file>${LOG_PATH}/controller/all.log</file>
+			<rollingPolicy
+				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<FileNamePattern>${LOG_PATH}/controller/all.log.%d{yyyy-MM-dd}.%i.zip
+				</FileNamePattern>
+				<MaxHistory>30</MaxHistory>
+				<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+					<maxFileSize>${LOG_FILE_SIZE}</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+			</rollingPolicy>
+			<encoder
+				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+				</pattern>
+				<charset>${LOG_CHARSET}</charset>
+			</encoder>
+		</appender>
+
+		<!-- error log appender -->
+		<appender name="ERROR-APPENDER"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<append>true</append>
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>error</level>
+			</filter>
+			<file>${LOG_PATH}/controller/error.log</file>
+			<rollingPolicy
+				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<FileNamePattern>${LOG_PATH}/controller/error.log.%d{yyyy-MM-dd}.%i.zip
+				</FileNamePattern>
+				<MaxHistory>30</MaxHistory>
+				<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+					<maxFileSize>${LOG_FILE_SIZE}</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+			</rollingPolicy>
+			<encoder
+				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+				</pattern>
+				<charset>${LOG_CHARSET}</charset>
+			</encoder>
+		</appender>
+
+		<root level="${LOG_ROOT_LEVEL}">
+			<appender-ref ref="ROOT-APPENDER" />
+			<appender-ref ref="ERROR-APPENDER" />
+		</root>
+		<logger name="org.hibernate" level="INFO" additivity="false" />
+		<logger name="com.open.item" level="INFO" additivity="false" />
+	</springProfile>
+
+	<springProfile name="dev">
+		<!-- console log appender -->
+		<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>
+					%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+					<!-- %d %-5p %-32t - %m%n -->
+				</pattern>
+				<charset>${LOG_CHARSET}</charset>
+			</encoder>
+		</appender>
+		<root level="${LOG_ROOT_LEVEL}">
+			<appender-ref ref="STDOUT" />
+		</root>
+		<logger name="org.hibernate" level="DEBUG" additivity="false" />
+		<logger name="com.open.item" level="DEBUG" additivity="false" />
+	</springProfile>
+
+</configuration>
