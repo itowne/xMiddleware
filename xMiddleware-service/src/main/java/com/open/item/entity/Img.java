@@ -1,6 +1,7 @@
 package com.open.item.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.open.item.entity.enumObject.ImgEnum;
 import com.open.item.entity.enumObject.StatEnum;
 
 @Entity
@@ -37,9 +39,22 @@ public class Img implements Serializable {
     @Column(name = "img_url")
     private String imgUrl;
 
+    @Column(name = "ori_filename")
+    private String oriFileName;
+
+    @Column(name = "sys_filename")
+    private String sysFileName;
+
+    @Column(name = "file_md5")
+    private String fileMd5;
+
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "stat")
     private StatEnum stat;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "img_type")
+    private ImgEnum imgType;
 
     @Column(name = "create_id")
     private String createId;
@@ -112,5 +127,42 @@ public class Img implements Serializable {
 
     public void setUpdTime(Date updTime) {
         this.updTime = updTime;
+    }
+
+    public String getCreateTimeLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(getCreateTime());
+    }
+
+    public String getOriFileName() {
+        return oriFileName;
+    }
+
+    public void setOriFileName(String oriFileName) {
+        this.oriFileName = oriFileName;
+    }
+
+    public String getSysFileName() {
+        return sysFileName;
+    }
+
+    public void setSysFileName(String sysFileName) {
+        this.sysFileName = sysFileName;
+    }
+
+    public String getFileMd5() {
+        return fileMd5;
+    }
+
+    public void setFileMd5(String fileMd5) {
+        this.fileMd5 = fileMd5;
+    }
+
+    public ImgEnum getImgType() {
+        return imgType;
+    }
+
+    public void setImgType(ImgEnum imgType) {
+        this.imgType = imgType;
     }
 }

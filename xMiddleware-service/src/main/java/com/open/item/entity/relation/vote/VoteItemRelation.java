@@ -1,6 +1,7 @@
 package com.open.item.entity.relation.vote;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 投票关联关系
@@ -40,6 +42,12 @@ public class VoteItemRelation implements Serializable {
 
     @Column(name = "idx")
     private int idx;
+
+    @Transient
+    private VoteCountRelation vcr;
+
+    @Transient
+    private BigDecimal process;
 
     public long getId() {
         return id;
@@ -79,6 +87,22 @@ public class VoteItemRelation implements Serializable {
 
     public void setIdx(int idx) {
         this.idx = idx;
+    }
+
+    public VoteCountRelation getVcr() {
+        return vcr;
+    }
+
+    public void setVcr(VoteCountRelation vcr) {
+        this.vcr = vcr;
+    }
+
+    public BigDecimal getProcess() {
+        return process;
+    }
+
+    public void setProcess(BigDecimal process) {
+        this.process = process;
     }
 
 }

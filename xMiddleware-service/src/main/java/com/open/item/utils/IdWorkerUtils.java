@@ -54,8 +54,20 @@ public class IdWorkerUtils {
         return "VOT" + uuidWorker();
     }
 
+    public static String virIdWorker() {
+        return "VIR" + uuidWorker();
+    }
+
     public static String usrIdWorker() {
         return "USR" + uuidWorker();
+    }
+
+    public static String vcrIdWorker() {
+        return "VCR" + uuidWorker();
+    }
+
+    public static String picIdWorker() {
+        return "PIC" + uuidWorker();
     }
 
     /**

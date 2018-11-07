@@ -4,7 +4,7 @@ public enum UserRoleEnum {
 
     ADMIN("管理员"),
 
-    NORMAL("一般用户");
+    NORMAL("用户");
 
     private String label;
 

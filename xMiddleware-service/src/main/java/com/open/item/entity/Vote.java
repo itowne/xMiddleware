@@ -1,6 +1,7 @@
 package com.open.item.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -100,5 +101,10 @@ public class Vote implements Serializable {
 
     public void setUpdTime(Date updTime) {
         this.updTime = updTime;
+    }
+
+    public String getCreateTimeLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(getCreateTime());
     }
 }

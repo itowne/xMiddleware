@@ -1,6 +1,7 @@
 package com.open.item.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -40,6 +41,9 @@ public class User implements Serializable {
 
     @Column(name = "login_name")
     private String loginName;
+
+    @Column(name = "real_name")
+    private String realName;
 
     @Column(name = "pwd")
     private String pwd;
@@ -130,6 +134,23 @@ public class User implements Serializable {
 
     public void setUpdTime(Date updTime) {
         this.updTime = updTime;
+    }
+
+    public String getUserRoleLabel() {
+        return this.getUserRole().getLabel();
+    }
+
+    public String getCreateTimeLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(getCreateTime());
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
 }

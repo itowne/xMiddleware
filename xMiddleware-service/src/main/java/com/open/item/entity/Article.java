@@ -1,6 +1,7 @@
 package com.open.item.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -36,6 +37,24 @@ public class Article implements Serializable {
 
     @Column(name = "content")
     private String content;
+
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "footer")
+    private String footer;
+
+    @Column(name = "end_time")
+    private Date endTime;
+
+    @Column(name = "start_time")
+    private Date startTime;
+
+    @Column(name = "vote_id")
+    private String voteId;
+
+    @Column(name = "img_id")
+    private String imgId;
 
     @Column(name = "create_id")
     private String createId;
@@ -106,11 +125,74 @@ public class Article implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getCreateTimeLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(getCreateTime());
+    }
+
+    public String getEndTimeLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(getEndTime());
+    }
+
+    public String getStartTimeLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(getStartTime());
+    }
+
     public Date getUpdTime() {
         return updTime;
     }
 
     public void setUpdTime(Date updTime) {
         this.updTime = updTime;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getFooter() {
+        return footer;
+    }
+
+    public void setFooter(String footer) {
+        this.footer = footer;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getVoteId() {
+        return voteId;
+    }
+
+    public void setVoteId(String voteId) {
+        this.voteId = voteId;
+    }
+
+    public String getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(String imgId) {
+        this.imgId = imgId;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 }

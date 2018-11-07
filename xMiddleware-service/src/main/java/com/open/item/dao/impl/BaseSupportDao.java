@@ -142,7 +142,6 @@ public class BaseSupportDao extends HibernateDaoSupport implements BaseDao {
     public <T> Page<T> findPageByCriteria(DetachedCriteria dc, int startIndex, int pageSize) {
         int totalCount = this.countByDeCriteria(dc).intValue();
         Page<T> page = new Page<T>(null, totalCount, startIndex, pageSize);
-        // dc.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<T> list = (List<T>) getHibernateTemplate().findByCriteria(dc, startIndex, pageSize);
         page.setItems(list);
         return page;
@@ -177,7 +176,6 @@ public class BaseSupportDao extends HibernateDaoSupport implements BaseDao {
      */
     @SuppressWarnings("unchecked")
     public <T> List<T> findByCriteria(DetachedCriteria criteria) {
-        // criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return (List<T>) this.getHibernateTemplate().findByCriteria(criteria);
     }
 

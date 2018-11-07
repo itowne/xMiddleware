@@ -13,10 +13,10 @@
 		<appender name="ROOT-APPENDER"
 			class="ch.qos.logback.core.rolling.RollingFileAppender">
 			<append>true</append>
-			<file>${LOG_PATH}/controller/all.log</file>
+			<file>${LOG_PATH}/log/all.log</file>
 			<rollingPolicy
 				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-				<FileNamePattern>${LOG_PATH}/controller/all.log.%d{yyyy-MM-dd}.%i.zip
+				<FileNamePattern>${LOG_PATH}/log/all.log.%d{yyyy-MM-dd}.%i.zip
 				</FileNamePattern>
 				<MaxHistory>30</MaxHistory>
 				<timeBasedFileNamingAndTriggeringPolicy
@@ -39,10 +39,10 @@
 			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 				<level>error</level>
 			</filter>
-			<file>${LOG_PATH}/controller/error.log</file>
+			<file>${LOG_PATH}/log/error.log</file>
 			<rollingPolicy
 				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-				<FileNamePattern>${LOG_PATH}/controller/error.log.%d{yyyy-MM-dd}.%i.zip
+				<FileNamePattern>${LOG_PATH}/log/error.log.%d{yyyy-MM-dd}.%i.zip
 				</FileNamePattern>
 				<MaxHistory>30</MaxHistory>
 				<timeBasedFileNamingAndTriggeringPolicy

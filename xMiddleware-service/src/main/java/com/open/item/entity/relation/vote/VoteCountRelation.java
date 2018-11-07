@@ -38,8 +38,8 @@ public class VoteCountRelation implements Serializable {
     @Column(name = "vote_item_rl_id")
     private String voteItemRelationId;
 
-    @Column(name = "activity_id")
-    private String activityId;
+    @Column(name = "article_id")
+    private String articleId;
 
     @Column(name = "counter")
     private long counter;
@@ -76,19 +76,19 @@ public class VoteCountRelation implements Serializable {
         this.voteItemRelationId = voteItemRelationId;
     }
 
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
     public long getCounter() {
         return counter;
     }
 
     public void setCounter(long counter) {
         this.counter = counter;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 }
