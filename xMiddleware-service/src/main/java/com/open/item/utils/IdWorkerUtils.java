@@ -70,6 +70,14 @@ public class IdWorkerUtils {
         return "PIC" + uuidWorker();
     }
 
+    public static String aayIdWorker() {
+        return "AAY" + uuidWorker();
+    }
+
+    public static String vdoIdWorker() {
+        return "VDO" + uuidWorker();
+    }
+
     /**
      * 判断ID有效性： 1、长度24位 2、英文、数字组合
      *

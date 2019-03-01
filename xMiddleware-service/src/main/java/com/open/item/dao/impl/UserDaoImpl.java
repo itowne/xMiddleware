@@ -3,6 +3,7 @@ package com.open.item.dao.impl;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -16,8 +17,11 @@ import com.open.item.entity.User;
 public class UserDaoImpl extends BaseSupportDao implements UserDao {
 
     @Override
-    public Page<User> findUserPage(Integer start, Integer pagesize) {
+    public Page<User> findUserPage(Integer start, Integer pagesize, String loginName) {
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        if (StringUtils.isNotBlank(loginName)) {
+            criteria.add(Restrictions.eq("loginName", loginName));
+        }
         criteria.addOrder(Order.desc("createTime"));
         return this.findPageByCriteria(criteria, start, pagesize);
     }

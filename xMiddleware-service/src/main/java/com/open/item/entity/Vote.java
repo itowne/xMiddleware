@@ -13,10 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.open.item.entity.enumObject.StatEnum;
 
 @Entity
 @Table(name = "t_vote")
+@DynamicUpdate
 public class Vote implements Serializable {
 
     /**

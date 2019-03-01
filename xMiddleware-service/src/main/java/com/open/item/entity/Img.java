@@ -13,11 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.open.item.entity.enumObject.ImgEnum;
 import com.open.item.entity.enumObject.StatEnum;
 
 @Entity
 @Table(name = "t_img")
+@DynamicUpdate
 public class Img implements Serializable {
 
     /**

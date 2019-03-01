@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.open.item.dao.ArticleDao;
 import com.open.item.entity.Article;
 import com.open.item.entity.Page;
+import com.open.item.entity.enumObject.BooleanEnum;
 import com.open.item.entity.enumObject.ViewTypeEnum;
 import com.open.item.service.ArticleService;
 
@@ -59,6 +60,18 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findByType(ViewTypeEnum vte) {
         return articleDao.findByType(vte);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Page<Article> findArtPage4View(Integer start, Integer pagesize, ViewTypeEnum vte) {
+        return articleDao.findArtPage4View(start, pagesize, vte);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Article> findByIsTop(BooleanEnum isTop) {
+        return articleDao.findByIsTop(isTop);
     }
 
 }

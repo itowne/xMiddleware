@@ -13,10 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.open.item.entity.enumObject.BooleanEnum;
 import com.open.item.entity.enumObject.StatEnum;
 
 @Entity
 @Table(name = "t_article")
+@DynamicUpdate
 public class Article implements Serializable {
 
     /**
@@ -68,6 +72,9 @@ public class Article implements Serializable {
 
     @Column(name = "upd_time")
     private Date updTime;
+
+    @Column(name = "is_top")
+    private BooleanEnum isTop;
 
     public long getId() {
         return id;
@@ -126,7 +133,7 @@ public class Article implements Serializable {
     }
 
     public String getCreateTimeLabel() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(getCreateTime());
     }
 
@@ -138,6 +145,16 @@ public class Article implements Serializable {
     public String getStartTimeLabel() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(getStartTime());
+    }
+
+    public String getStartDateLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(getStartTime());
+    }
+
+    public String getEndDateLabel() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(getEndTime());
     }
 
     public Date getUpdTime() {
@@ -194,5 +211,13 @@ public class Article implements Serializable {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public BooleanEnum getIsTop() {
+        return isTop;
+    }
+
+    public void setIsTop(BooleanEnum isTop) {
+        this.isTop = isTop;
     }
 }

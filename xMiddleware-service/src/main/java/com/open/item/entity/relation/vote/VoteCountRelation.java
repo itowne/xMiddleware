@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 /**
  * 投票统计数关联关系
  * 
@@ -17,6 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "t_vote_count_rl")
+@DynamicUpdate
 public class VoteCountRelation implements Serializable {
 
     /**

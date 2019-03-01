@@ -8,6 +8,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.open.item.beans.Const;
 import com.open.item.entity.User;
+import com.open.item.entity.enumObject.UserRoleEnum;
 
 public class BaseController {
 
@@ -31,6 +32,11 @@ public class BaseController {
 
     protected User sessionUser() {
         return (User) getRequest().getSession().getAttribute(Const.ADMIN_SESSION);
+    }
+
+    protected boolean isAdmin() {
+        User u = sessionUser();
+        return u.getUserRole() == UserRoleEnum.SUPER ? true : false;
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.open.item.entity.Article;
 import com.open.item.entity.Page;
+import com.open.item.entity.enumObject.BooleanEnum;
 import com.open.item.entity.enumObject.ViewTypeEnum;
 
 public interface ArticleService {
@@ -20,5 +21,9 @@ public interface ArticleService {
 
     public List<Article> findAll();
 
+    public List<Article> findByIsTop(BooleanEnum isTop);
+
     public List<Article> findByType(ViewTypeEnum vte);
+
+    public Page<Article> findArtPage4View(Integer start, Integer pagesize, ViewTypeEnum vte);
 }

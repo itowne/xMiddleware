@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.open.item.entity.enumObject.StatEnum;
 import com.open.item.entity.enumObject.UserRoleEnum;
 
@@ -24,6 +26,7 @@ import com.open.item.entity.enumObject.UserRoleEnum;
  */
 @Entity
 @Table(name = "t_user")
+@DynamicUpdate
 public class User implements Serializable {
 
     /**

@@ -7,7 +7,7 @@ public interface UserService {
 
     public void save(User user);
 
-    public Page<User> findUserPage(Integer start, Integer pagesize);
+    public Page<User> findUserPage(Integer start, Integer pagesize, String loginName);
 
     public User findById(String id);
 

@@ -26,7 +26,7 @@
 			</rollingPolicy>
 			<encoder
 				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 				</pattern>
 				<charset>${LOG_CHARSET}</charset>
 			</encoder>
@@ -52,7 +52,7 @@
 			</rollingPolicy>
 			<encoder
 				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-				<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 				</pattern>
 				<charset>${LOG_CHARSET}</charset>
 			</encoder>

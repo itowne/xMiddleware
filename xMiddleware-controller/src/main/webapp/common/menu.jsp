@@ -9,7 +9,9 @@
 			<!--<li><a><i class="fa fa-rss-square"></i> 活动管理 </a></li>-->
 			<li id="vote-li"><a href="${ctx}/vote/index"><i class="fa fa-tasks"></i> 投票管理</a></li>
 			<li id="img-li"><a href="${ctx}/img/index"><i class="fa fa-image"></i> 图片管理 </a></li>
+			<li id="vdo-li"><a href="${ctx}/vdo/index"><i class="fa fa-video-camera"></i> 视频管理 </a></li>
 			<li id="user-li"><a href="${ctx}/user/index"><i class="fa fa-user"></i> 用户管理</a></li>
+			<li id="access-li"><a href="${ctx}/access/index"><i class="fa fa-bar-chart"></i> 访问统计</a></li>
 		</ul>
 	</div>
 </div>

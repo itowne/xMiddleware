@@ -52,7 +52,8 @@ public class WebConfig implements WebMvcConfigurer {
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setDefaultEncoding("UTF-8");
-        multipartResolver.setMaxUploadSize(10485760L);
+        // multipartResolver.setMaxUploadSize(10485760L);
+        multipartResolver.setMaxUploadSize(52428800L);
         return multipartResolver;
     }
 
@@ -84,7 +85,8 @@ public class WebConfig implements WebMvcConfigurer {
         SessionInterceptor si = new SessionInterceptor();
         registry.addInterceptor(si).addPathPatterns("/**").excludePathPatterns("/").excludePathPatterns("/resources/**")
                 .excludePathPatterns("/upload/**").excludePathPatterns("/login").excludePathPatterns("/doLogin")
-                .excludePathPatterns("/view/**").excludePathPatterns("/admin");
+                .excludePathPatterns("/view/**").excludePathPatterns("/admin").excludePathPatterns("/artApply/doAdd")
+                .excludePathPatterns("/vdo/vdoShow/*");
     }
 
     @Override

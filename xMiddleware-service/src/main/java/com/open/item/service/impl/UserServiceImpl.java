@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<User> findUserPage(Integer start, Integer pagesize) {
-        return userDao.findUserPage(start, pagesize);
+    public Page<User> findUserPage(Integer start, Integer pagesize, String loginName) {
+        return userDao.findUserPage(start, pagesize, loginName);
     }
 
     @Transactional(readOnly = true)

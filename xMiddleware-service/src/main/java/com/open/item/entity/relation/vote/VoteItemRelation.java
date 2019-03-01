@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 /**
  * 投票关联关系
  * 
@@ -19,6 +21,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "t_vote_rl")
+@DynamicUpdate
 public class VoteItemRelation implements Serializable {
 
     /**

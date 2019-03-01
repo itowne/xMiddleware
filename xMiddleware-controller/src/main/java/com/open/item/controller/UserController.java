@@ -1,10 +1,13 @@
 package com.open.item.controller;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -41,7 +44,12 @@ public class UserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userList")
     public DataTableBean<User> userList(HttpServletRequest request, int start, int length) {
-        Page<User> page = userService.findUserPage(start, length);
+        User u = sessionUser();
+        String loginName = null;
+        if (!isAdmin()) {
+            loginName = u.getLoginName();
+        }
+        Page<User> page = userService.findUserPage(start, length, loginName);
         DataTableBean<User> dtb = new DataTableBean<User>(page);
         return dtb;
     }
@@ -49,6 +57,10 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/toAddUser")
     public ModelAndView toAdd(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        if (isAdmin()) {
+            mav.addObject("isAdmin", "1");
+            mav.addObject("roleAdmin", roleSelect());
+        }
         mav.setViewName("user/add");
         return mav;
     }
@@ -60,9 +72,13 @@ public class UserController extends BaseController {
         String realName = request.getParameter("realName");
         String pwd = request.getParameter("pwd");
         String mobile = request.getParameter("mobile");
+        String userRole = request.getParameter("userRole");
         User exUser = userService.findByLoginName(loginName);
         if (exUser != null) {
             return CommonJson.dataResponse(CommonJson.ERROR, "用户名已存在!");
+        }
+        if (StringUtils.isBlank(userRole) && isAdmin()) {
+            return CommonJson.dataResponse(CommonJson.ERROR, "请选择一个角色!");
         }
         User u = new User();
         u.setLoginName(loginName);
@@ -73,7 +89,7 @@ public class UserController extends BaseController {
         u.setUpdTime(new Date());
         u.setUserId(IdWorkerUtils.usrIdWorker());
         u.setUserStat(StatEnum.VALID);
-        u.setUserRole(UserRoleEnum.ADMIN);
+        u.setUserRole(UserRoleEnum.valueOf(userRole));
         try {
             userService.save(u);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
@@ -86,6 +102,11 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/index")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        if (isAdmin()) {
+            mav.addObject("isAdmin", "1");
+        }
+        User u = sessionUser();
+        mav.addObject("loginName", u.getLoginName());
         mav.setViewName("user/index");
         return mav;
     }
@@ -98,6 +119,12 @@ public class UserController extends BaseController {
             mav.setViewName("user/index");
             return mav;
         }
+        Map<String, String> roleMap = roleSelect();
+        if (isAdmin()) {
+            mav.addObject("isAdmin", "1");
+            roleMap.put(UserRoleEnum.SUPER.name(), UserRoleEnum.SUPER.getLabel());
+        }
+        mav.addObject("roleAdmin", roleMap);
         mav.setViewName("user/edit");
         mav.addObject("user", u);
         return mav;
@@ -110,15 +137,22 @@ public class UserController extends BaseController {
         String pwd = request.getParameter("pwd");
         String mobile = request.getParameter("mobile");
         String userId = request.getParameter("userId");
+        String userRole = request.getParameter("userRole");
         User u = userService.findById(userId);
         if (u == null) {
             return CommonJson.dataResponse(CommonJson.ERROR, "未找到该记录");
+        }
+        if (StringUtils.isBlank(userRole) && isAdmin()) {
+            return CommonJson.dataResponse(CommonJson.ERROR, "请选择一个角色!");
         }
         if (!pwd.equals(u.getPwd())) {
             u.setPwd(PwdUtils.encryptPwd(pwd));
         }
         u.setRealName(realName);
         u.setMobile(mobile);
+        if (isAdmin()) {
+            u.setUserRole(UserRoleEnum.valueOf(userRole));
+        }
         try {
             userService.update(u);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
@@ -142,6 +176,17 @@ public class UserController extends BaseController {
             logger.info("删除用户失败!错误原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
+    }
+
+    private Map<String, String> roleSelect() {
+        Map<String, String> targetMap = new HashMap<>();
+        for (UserRoleEnum role : UserRoleEnum.values()) {
+            if (role == UserRoleEnum.SUPER) {
+                continue;
+            }
+            targetMap.put(role.name(), role.getLabel());
+        }
+        return targetMap;
     }
 
 }

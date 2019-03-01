@@ -7,7 +7,7 @@ import com.open.item.entity.User;
 
 public interface UserDao extends BaseDao {
 
-    public Page<User> findUserPage(Integer start, Integer pagesize);
+    public Page<User> findUserPage(Integer start, Integer pagesize, String loginName);
 
     public List<User> findUserList();
 
