@@ -94,7 +94,7 @@ public class UserController extends BaseController {
             userService.save(u);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("新增用户失败！原因:{}", e.getMessage());
+            logger.error("新增用户失败！原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
     }
@@ -157,7 +157,7 @@ public class UserController extends BaseController {
             userService.update(u);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("修改用户失败!错误原因:{}", e.getMessage());
+            logger.error("修改用户失败!错误原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
     }
@@ -173,7 +173,7 @@ public class UserController extends BaseController {
             userService.deleteUser(u);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("删除用户失败!错误原因:{}", e.getMessage());
+            logger.error("删除用户失败!错误原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
     }

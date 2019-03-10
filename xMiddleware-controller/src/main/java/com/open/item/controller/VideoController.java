@@ -103,7 +103,7 @@ public class VideoController extends BaseController {
                     fileName = vdo.getSysFileName();
                 }
             } catch (Exception e) {
-                logger.info("vdo新增失败！错误原因:{}", e.getMessage());
+                logger.error("vdo新增失败！错误原因:{}", e.getMessage());
                 return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
             }
         }
@@ -193,7 +193,7 @@ public class VideoController extends BaseController {
                     fileName = md5Vdo.getSysFileName();
                 }
             } catch (Exception e) {
-                logger.info("vdo修改失败！错误原因:{}", e.getMessage());
+                logger.error("vdo修改失败！错误原因:{}", e.getMessage());
                 return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
             }
         } else {

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.open.item.entity.Access;
 import com.open.item.entity.Article;
 import com.open.item.entity.Img;
 import com.open.item.entity.Page;
@@ -32,6 +33,7 @@ import com.open.item.entity.enumObject.ViewTypeEnum;
 import com.open.item.entity.pojo.H5View;
 import com.open.item.entity.relation.vote.VoteCountRelation;
 import com.open.item.entity.relation.vote.VoteItemRelation;
+import com.open.item.service.AccessService;
 import com.open.item.service.ArticleService;
 import com.open.item.service.ImgService;
 import com.open.item.service.VoteCountRelationService;
@@ -60,6 +62,9 @@ public class ViewController extends BaseController {
 
     @Resource(name = "voteCountRelationService")
     private VoteCountRelationService voteCountRelationService;
+
+    @Resource(name = "accessService")
+    private AccessService accessService;
 
     @Resource(name = "imgService")
     private ImgService imgService;
@@ -110,8 +115,30 @@ public class ViewController extends BaseController {
             mav.addObject("vir", JSON.toJSONString(vir));
         }
         mav.addObject("article", art);
+        String ipAddr = request.getHeader("X-FORWARDED-FOR");
+        if (StringUtils.isBlank(ipAddr)) {
+            ipAddr = request.getRemoteAddr();
+        }
+        mav.addObject("accessCount", accessCount(articleId, ipAddr));
         mav.setViewName("h5view/" + vte + "/detail");
         return mav;
+    }
+
+    private int accessCount(String artId, String ip) {
+        try {
+            Date current = new Date();
+            Access access = new Access();
+            access.setAccessId(IdWorkerUtils.acsIdWorker());
+            access.setAccessIp(ip);
+            access.setArticleId(artId);
+            access.setCreateTime(current);
+            accessService.save(access);
+            return accessService.findAccessCountByArtId(artId);
+        } catch (Exception e) {
+            logger.error("统计访问出错！错误原因:{}", e.getMessage());
+            return 0;
+        }
+
     }
 
     @RequestMapping("/main/{viewType}")
@@ -197,7 +224,7 @@ public class ViewController extends BaseController {
         try {
             return ViewTypeEnum.valueOf(viewType.toUpperCase());
         } catch (Exception e) {
-            logger.info("view列表枚举转换出错!vte:{}", viewType);
+            logger.error("view列表枚举转换出错!vte:{}", viewType);
             return null;
         }
     }
@@ -282,7 +309,7 @@ public class ViewController extends BaseController {
                 return true;
             }
         } catch (Exception e) {
-            logger.info("比较投票时间出错!错误原因:{}", e.getMessage());
+            logger.error("比较投票时间出错!错误原因:{}", e.getMessage());
         }
         return false;
     }

@@ -102,7 +102,7 @@ public class VoteController extends BaseController {
             voteService.save(v);
             return v.getVoteId();
         } catch (Exception e) {
-            logger.info("投票组写入失败!错误原因:{}", e.getMessage());
+            logger.error("投票组写入失败!错误原因:{}", e.getMessage());
         }
         return null;
     }
@@ -116,7 +116,7 @@ public class VoteController extends BaseController {
                 }
             }
         } catch (Exception e) {
-            logger.info("添加投票子项目失败！原因:{}", e.getMessage());
+            logger.error("添加投票子项目失败！原因:{}", e.getMessage());
         }
 
     }

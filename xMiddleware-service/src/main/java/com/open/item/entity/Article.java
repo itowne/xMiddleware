@@ -133,7 +133,7 @@ public class Article implements Serializable {
     }
 
     public String getCreateTimeLabel() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(getCreateTime());
     }
 

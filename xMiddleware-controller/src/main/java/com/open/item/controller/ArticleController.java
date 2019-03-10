@@ -168,7 +168,7 @@ public class ArticleController extends BaseController {
             addInitVoteCount(articleId, voteId);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("新增内容失败!错误原因:{}", e.getMessage());
+            logger.error("新增内容失败!错误原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
     }
@@ -202,13 +202,13 @@ public class ArticleController extends BaseController {
     public ModelAndView toEdit(HttpServletRequest request, @PathVariable String articleId) {
         ModelAndView mav = new ModelAndView();
         if (StringUtils.isBlank(articleId)) {
-            logger.info("articleId为空");
+            logger.error("articleId为空");
             mav.setViewName("article/index");
             return mav;
         }
         Article art = articleService.findById(articleId);
         if (art == null) {
-            logger.info("内容对象不存在");
+            logger.error("内容对象不存在");
             mav.setViewName("article/index");
             return mav;
         }
@@ -268,7 +268,7 @@ public class ArticleController extends BaseController {
             addInitVoteCount(exArt.getArticleId(), voteId);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("新增内容失败!错误原因:{}", e.getMessage());
+            logger.error("修改内容失败!错误原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
 
@@ -338,7 +338,7 @@ public class ArticleController extends BaseController {
                             fileName = img.getSysFileName();
                         }
                     } catch (Exception e) {
-                        logger.info("插入图片失败！错误原因:{}", e.getMessage());
+                        logger.error("插入图片失败！错误原因:{}", e.getMessage());
                         return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
                     }
                 }

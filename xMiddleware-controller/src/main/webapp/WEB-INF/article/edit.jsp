@@ -300,11 +300,11 @@
 				},
 				success :function (data){
 					if(data==undefined||data==""){
-						xAlert("提示","新增内容失败","error");
+						xAlert("提示","修改内容失败","error");
 						return;
 					}
 					if(data.resCode!=1){
-						xAlert("提示","新增内容失败! "+data.resMsg,"error");
+						xAlert("提示","修改内容失败! "+data.resMsg,"error");
 						return;
 					}
 					xAlert("提示","修改内容成功","success");
@@ -313,7 +313,7 @@
 					},3000)
 				} , 
 				error :function (XMLHttpRequest, textStatus, errorThrown){
-					xAlert("提示","新增内容失败! 请稍后再试","error");
+					xAlert("提示","修改内容失败! 请稍后再试","error");
 				},
 				complete :function complete(XMLHttpRequest, textStatus){}
 			});

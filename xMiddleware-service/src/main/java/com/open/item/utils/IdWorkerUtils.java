@@ -78,6 +78,10 @@ public class IdWorkerUtils {
         return "VDO" + uuidWorker();
     }
 
+    public static String acsIdWorker() {
+        return "ACS" + uuidWorker();
+    }
+
     /**
      * 判断ID有效性： 1、长度24位 2、英文、数字组合
      *

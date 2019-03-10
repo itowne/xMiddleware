@@ -96,7 +96,7 @@ public class ImgController extends BaseController {
                     fileName = img.getSysFileName();
                 }
             } catch (Exception e) {
-                logger.info("IMG新增图片失败！错误原因:{}", e.getMessage());
+                logger.error("IMG新增图片失败！错误原因:{}", e.getMessage());
                 return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
             }
         }
@@ -117,7 +117,7 @@ public class ImgController extends BaseController {
         try {
             img.setFileMd5(DigestUtils.md5Hex(file.getBytes()));
         } catch (Exception e) {
-            logger.info("设置文件MD5失败!错误原因:{}", e.getMessage());
+            logger.error("设置文件MD5失败!错误原因:{}", e.getMessage());
             img.setFileMd5("0");
         }
         img.setOriFileName(file.getOriginalFilename());
@@ -185,7 +185,7 @@ public class ImgController extends BaseController {
                     fileName = md5Img.getSysFileName();
                 }
             } catch (Exception e) {
-                logger.info("IMG修改图片失败！错误原因:{}", e.getMessage());
+                logger.error("IMG修改图片失败！错误原因:{}", e.getMessage());
                 return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
             }
         } else {
@@ -224,7 +224,7 @@ public class ImgController extends BaseController {
             imgService.delImg(exImg);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("删除图片失败!错误原因:{}", e.getMessage());
+            logger.error("删除图片失败!错误原因:{}", e.getMessage());
             return CommonJson.dataResponse(CommonJson.ERROR, e.getMessage());
         }
     }

@@ -81,7 +81,7 @@ public class ArtApplyController extends BaseController {
             artApplyService.save(aa);
             return CommonJson.dataResponse(CommonJson.SUCC, null);
         } catch (Exception e) {
-            logger.info("报名失败!错误原因:{},articleId:{},applyName:{},mobile:{}", e.getMessage(), articleId, applyName,
+            logger.error("报名失败!错误原因:{},articleId:{},applyName:{},mobile:{}", e.getMessage(), articleId, applyName,
                     mobile);
             return CommonJson.dataResponse(CommonJson.ERROR, "报名失败!请稍后再试.");
         }
